@@ -6,6 +6,7 @@ export default gql`
   type Query {
     getEventByID(id: ID!): Event
   }
+  
   type Mutation {
     addEvent(
       start: Time!

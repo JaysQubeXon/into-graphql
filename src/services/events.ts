@@ -18,7 +18,13 @@ export default class EventsService {
     if (event[0].hasOwnProperty("id")) {
       let participants: Participant[] = [];
       participants = data.participants.filter((p: Participant) => {
-        return p.id !== event[0].id;
+        for (let i = 0; i < p.events.length; i++) {
+          if (p.events[i] !== event[0].id) {
+            return false;
+          } else {
+            return true;
+          }
+        }
       });
       if (participants.length > 0) {
         event[0].participants = participants;
@@ -78,7 +84,13 @@ export default class EventsService {
     let participantList: Participant[] = [];
     for (let i = 0; i < participants.length; i++) {
       let participant = data.participants.find((p: Participant) => {
-        return p.id === participants[i];
+        for (let i = 0; i < p.events.length; i++) {
+          if (p.events[i] === participants[i]) {
+            return true;
+          } else {
+            return false;
+          }
+        }
       });
       if (participant) {
         newEvent.participants.push(participant.id);
